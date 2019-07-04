@@ -1,0 +1,23 @@
+spring:
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database: default
+    properties:
+      dialect: org.hibernate.dialect.DerbyDialect
+    hibernate:
+      ddl-auto: update    
+  datasource:
+    continue-on-error: false
+    generate-unique-name: false
+    username: app
+    tomcat:
+      initial-size: 15
+      max-wait: 20000
+      max-active: 100
+      max-idle: 15
+      min-idle: 8
+      default-auto-commit: true
+  main:
+    allow-bean-definition-overriding: true
+    
