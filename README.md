@@ -1,6 +1,6 @@
 # Settlement
 
-Application will  load financial Transaction records from CSV file and calculate Relative Account balance of a Account at a gven point of Time.
+Application will  load financial Transaction records from CSV file and calculate Relative Account balance of an Account at a gven point of Time.
 
 Technologies Used:
 
@@ -10,11 +10,11 @@ Csv File is read using Jackson data format csv library.
 
 
 
-In order to load data from CSV to DB, Hit end point: 
+Endpoint for loading Transactions:
 
 localhost:8080/api/v1/settlement
 
-In order to get relative Account balance:
+Endpoint for calculating relative Account balance:
 
 localhost:8080/api/v1/settlement/transactions
 
