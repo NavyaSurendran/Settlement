@@ -1,6 +1,6 @@
 # Settlement
 
-Application will  load financial Transaction records from CSV file and calculate Relative Account balance of an Account at a gven point of Time.
+Application will  load financial Transaction records from CSV file and calculate Relative Account balance of an Account at a given point of Time.
 
 Technologies Used:
 
@@ -29,6 +29,7 @@ Endpoint for calculating relative Account balance:
 
 localhost:8080/api/v1/settlement/transactions
 
+Request Body:
 {
   "accountId" :"ACC334455",
    "fromDate" : "2018-47-20 12:47:55",
