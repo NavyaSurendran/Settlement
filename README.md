@@ -1,5 +1,7 @@
 # Settlement
 
+Application will  load financial Transaction records from CSV file and calculate Relative Account balance of a Account at a gven point of Time.
+
 Technologies Used:
 
 Spring Boot, JPA, Restful Webservices, Jackson Data format CSV, Derby .
