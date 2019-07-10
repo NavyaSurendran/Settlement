@@ -114,7 +114,7 @@ public class SettlementControllerTests {
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonToString(dto)))
 			.andExpect(status().isOk());
-		//verify(service, times(1)).getRelativeAccountBalace("ACC334455", date1, date3);
+		
 	}
 	
 	
