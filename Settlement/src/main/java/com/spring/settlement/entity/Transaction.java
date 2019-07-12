@@ -1,7 +1,7 @@
 package com.spring.settlement.entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @Table(name = "settlement_transaction")
 @Entity
 
-//@JsonIgnoreProperties(ignoreUnknown = true)
+
 public class Transaction implements Serializable{
 	
 	@Id
@@ -41,7 +41,7 @@ public class Transaction implements Serializable{
 	@JsonProperty(value="createAt")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd hh:mm:ss")
 	
-	private Date createAt;
+	private Timestamp createAt;
 	
 	@Column(name = "amount")
 	@JsonProperty
@@ -59,7 +59,7 @@ public class Transaction implements Serializable{
 		
 	}
 	
-	public Transaction(String transactionId, String fromAccountId, String toAccountId, Date createAt, Double amount, String transactionType, String relatedTransaction) {
+	public Transaction(String transactionId, String fromAccountId, String toAccountId, Timestamp createAt, Double amount, String transactionType, String relatedTransaction) {
 		this.transactionId = transactionId;
 		this.fromAccountId = fromAccountId;
 		this.toAccountId = toAccountId;
@@ -97,7 +97,7 @@ public class Transaction implements Serializable{
 		return createAt;
 	}
 
-	public void setCreateAt(Date createAt) {
+	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
 
