@@ -1,7 +1,9 @@
 package com.spring.settlement.service;
 
 import java.io.File;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import com.spring.settlement.repository.TransactionRepository;
 public class TransactionServiceImpl implements TransactionService {
 
 	TransactionRepository transactionRepository;
+	private static final String REVERSAL= "REVERSAL";
 
 	@Autowired
 	public TransactionServiceImpl(TransactionRepository transactionRepository) {
@@ -65,7 +68,15 @@ public class TransactionServiceImpl implements TransactionService {
 
 
 	@Override
-	 public Map<String, Object> getRelativeAccountBalace(String accountId, Date fromDate, Date toDate) {
+	 public Map<String, Object> getRelativeAccountBalace(String accountId, Date fromDate, Date toDate) throws ParseException {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+		String strDate = sdf.format(fromDate);
+		java.util.Date fromDate1 =  sdf.parse(strDate);
+		
+		
+		String strDate1 = sdf.format(toDate);
+		java.util.Date toDate1 =  sdf.parse(strDate);
 		
 		List<Transaction> transList = transactionRepository.findAll();
 		
@@ -74,7 +85,7 @@ public class TransactionServiceImpl implements TransactionService {
 		int count =0;
 		Map<String, Object> result = new HashMap<>();
 		for (Transaction transaction : transactions) {
-			if(transaction.getCreateAt().after(fromDate) || transaction.getCreateAt().before(toDate)) {
+			if(transaction.getCreateAt().after(fromDate1) || transaction.getCreateAt().before(toDate1)) {
 				if (transaction.getToAccountId().equalsIgnoreCase(accountId)) {
 					
 					amount+= transaction.getAmount();
@@ -101,7 +112,7 @@ public class TransactionServiceImpl implements TransactionService {
 		
 		for(Transaction transaction:TransactionList )  {
 			
-			if (transaction.getTransactionType().equalsIgnoreCase("REVERSAL")) {
+			if (transaction.getTransactionType().equals(REVERSAL)) {
 				String relatedTransactionId = transaction.getRelatedTransaction();
 				
 				for(Transaction trans: transactions ) {
