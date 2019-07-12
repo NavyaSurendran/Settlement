@@ -52,14 +52,9 @@ public class TransactionserviceImplTests {
 	public void setupMock() throws ParseException {
 		MockitoAnnotations.initMocks(this);
 		List<Transaction> transactions = new ArrayList<>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
-		
-		date=  sdf.parse("2018-10-21 12:47:55");
-		java.sql.Date date3 = new java.sql.Date(date.getTime());
-		
-		
+				
+		java.sql.Timestamp date1 = java.sql.Timestamp.valueOf("2018-10-20 12:47:550");
+		java.sql.Timestamp date3 = java.sql.Timestamp.valueOf("2018-10-21 12:47:55");
 		
 		transaction = new Transaction("TX10001", "ACC334455", "ACC998877",date1, 10.5, "PAYMENT", null);
 		transactions.add(transaction);
@@ -114,12 +109,10 @@ public class TransactionserviceImplTests {
     
 	@Test
 	public void testGetRelativeAccountBalance() throws ParseException, TransactionAlreadyExists {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
 		
-		date = (Date) sdf.parse("2018-10-21 09:30:00");
-		java.sql.Date date5 = new java.sql.Date(date.getTime());
+		
+		java.sql.Timestamp date1 = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date5 = java.sql.Timestamp.valueOf("2018-10-21 09:30:00");
 		List<Transaction> transactionList = generateTransactionList();
 		when(repo.saveAll(transactionList)).thenReturn(transactionList);
 		when(repo.findAll()).thenReturn(transactionList);
@@ -134,12 +127,9 @@ public class TransactionserviceImplTests {
 	
 	@Test
 	public void testGetRelativeAccountBalanceWithAcoountIdAsBeneficiary() throws ParseException, TransactionAlreadyExists {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
-		
-		date = (Date) sdf.parse("2018-10-21 09:30:00");
-		java.sql.Date date5 = new java.sql.Date(date.getTime());
+
+		java.sql.Timestamp date1 = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date5 = java.sql.Timestamp.valueOf("2018-10-21 09:30:00");
 		
 		List<Transaction> transactionList =generateTransactionListWithAccountNumberAsBeneficiary();
 		
@@ -154,23 +144,13 @@ public class TransactionserviceImplTests {
 	
 	public List<Transaction> generateTransactionList() throws ParseException{
 		List<Transaction> transactions = new ArrayList<>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		 date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
-		
-		date =  sdf.parse("2018-10-20 17:33:43"); 
-		java.sql.Date date2 = new java.sql.Date(date.getTime());
-		
-		 date = (Date) sdf.parse("2018-10-20 18:00:00");
-		java.sql.Date date3 = new java.sql.Date(date.getTime());
-		
-		 date = (Date) sdf.parse("2018-10-20 19:45:00");
-		 java.sql.Date date4 = new java.sql.Date(date.getTime());
-			
-		date = (Date) sdf.parse("2018-10-21 09:30:00");
-		java.sql.Date date5 = new java.sql.Date(date.getTime());
 		
 		
+		java.sql.Timestamp date1 = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date2 = java.sql.Timestamp.valueOf("2018-10-20 17:33:43");
+		java.sql.Timestamp date3 = java.sql.Timestamp.valueOf("2018-10-20 18:00:00");
+		java.sql.Timestamp date4 = java.sql.Timestamp.valueOf("2018-10-20 19:45:00");
+		java.sql.Timestamp date5 = java.sql.Timestamp.valueOf("2018-10-21 09:30:00");
 		
 		
 		Transaction t = new Transaction("TX10001", "ACC334455", "ACC778899",date1, 25.00, "PAYMENT", null);
@@ -189,21 +169,13 @@ public class TransactionserviceImplTests {
 	
 	public List<Transaction> generateTransactionListWithAccountNumberAsBeneficiary() throws ParseException{
 		List<Transaction> transactions = new ArrayList<>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		 date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
 		
-		date =  sdf.parse("2018-10-20 17:33:43"); 
-		java.sql.Date date2 = new java.sql.Date(date.getTime());
 		
-		 date = (Date) sdf.parse("2018-10-20 18:00:00");
-		java.sql.Date date3 = new java.sql.Date(date.getTime());
-		
-		 date = (Date) sdf.parse("2018-10-20 19:45:00");
-		 java.sql.Date date4 = new java.sql.Date(date.getTime());
-			
-		date = (Date) sdf.parse("2018-10-21 09:30:00");
-		java.sql.Date date5 = new java.sql.Date(date.getTime());
+		java.sql.Timestamp date1 = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date2 = java.sql.Timestamp.valueOf("2018-10-20 17:33:43");
+		java.sql.Timestamp date3 = java.sql.Timestamp.valueOf("2018-10-20 18:00:00");
+		java.sql.Timestamp date4 = java.sql.Timestamp.valueOf("2018-10-20 19:45:00");
+		java.sql.Timestamp date5 = java.sql.Timestamp.valueOf("2018-10-21 09:30:00");
 		
 		Transaction t = new Transaction("TX10001", "ACC334455", "ACC778899",date1, 25.00, "PAYMENT", null);
 		transactions.add(t);
