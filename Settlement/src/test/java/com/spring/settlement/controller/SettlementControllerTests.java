@@ -65,20 +65,17 @@ public class SettlementControllerTests {
 		MockitoAnnotations.initMocks(this);
 		mvc = MockMvcBuilders.standaloneSetup(controller).build();
 		List<Transaction> transactions = new ArrayList<>();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		java.util.Date date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
-		
-		java.util.Date date2 = sdf.parse("2018-10-21 12:47:55");
-		java.sql.Date date3 = new java.sql.Date(date2.getTime());
 		
 		
+		java.sql.Timestamp date = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date2 = java.sql.Timestamp.valueOf("2018-10-21 12:47:55");
 		
-		transaction = new Transaction("TX10006", "ACC334455", "ACC998877",date1, 10.5, "PAYMENT", null);
+		
+		transaction = new Transaction("TX10006", "ACC334455", "ACC998877",date, 10.5, "PAYMENT", null);
 		transactions.add(transaction);
-		transaction = new Transaction("TX10007", "ACC334455", "ACC998877",date1, 10.5, "PAYMENT", null);
+		transaction = new Transaction("TX10007", "ACC334455", "ACC998877",date, 10.5, "PAYMENT", null);
 		 transactions.add(transaction);
-		 transaction = new Transaction("TX100088", "ACC334455", "ACC998877",date3, 10.5, "PAYMENT", "TX10006");
+		 transaction = new Transaction("TX100088", "ACC334455", "ACC998877",date2, 10.5, "PAYMENT", "TX10006");
 		 transactions.add(transaction);
 
 	}
@@ -94,27 +91,24 @@ public class SettlementControllerTests {
 	
 	@Test
 	public void testRetrieveBalanceForPeriod() throws Exception {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-		java.util.Date date =  sdf.parse("2018-10-20 12:47:55"); 
-		java.sql.Date date1 = new java.sql.Date(date.getTime()); 
 		
-		java.util.Date date2 = sdf.parse("2018-10-21 12:47:55");
-		java.sql.Date date3 = new java.sql.Date(date2.getTime());
+		
+		java.sql.Timestamp date = java.sql.Timestamp.valueOf("2018-10-20 12:47:55");
+		java.sql.Timestamp date2 = java.sql.Timestamp.valueOf("2018-10-21 12:47:55");
 		
 		TransactionDTO dto = new TransactionDTO();
 		dto.setAccountId("ACC334455");
-		dto.setToDate(date3);
-		dto.setFromDate(date1);
+		dto.setToDate(date2);
+		dto.setFromDate(date);
 		Map<String, Object> result = new HashMap<>();
 		result.put("Relative Amount", 7.5);
 		result.put("Number of Transactions Included", 3);
 			
-		when(service.getRelativeAccountBalace("ACC334455", date1, date3)).thenReturn(result);
+		when(service.getRelativeAccountBalace("ACC334455", date, date2)).thenReturn(result);
 		mvc.perform(post("/api/v1/settlement/transactions")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonToString(dto)))
 			.andExpect(status().isOk());
-		
 	}
 	
 	
