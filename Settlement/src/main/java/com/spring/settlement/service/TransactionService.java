@@ -1,6 +1,7 @@
 package com.spring.settlement.service;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public interface TransactionService {
 	
 	public boolean saveAll(List<Transaction> transactionList) throws TransactionAlreadyExists;
 		
-	public  Map<String, Object> getRelativeAccountBalace(String accountId, Date fromDate, Date toDate);
+	public  Map<String, Object> getRelativeAccountBalace(String accountId, Date fromDate, Date toDate) throws ParseException;
 	
 	public List<Transaction> removeReversedTransaction(List<Transaction> TransactionList);
 	
