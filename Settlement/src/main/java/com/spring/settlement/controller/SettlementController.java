@@ -1,6 +1,7 @@
 package com.spring.settlement.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -50,7 +51,7 @@ public class SettlementController {
 	
 	@PostMapping(path="/transactions")
 	public ResponseEntity<?> retrieveBalanceForPeriod(@RequestBody final TransactionDTO dto,
-			HttpServletRequest request, HttpServletResponse response){
+			HttpServletRequest request, HttpServletResponse response) throws ParseException{
 		ResponseEntity<?> responseEntity;
 		Map<String, Object> result = transactionService.getRelativeAccountBalace(dto.getAccountId(), dto.getFromDate(), dto.getToDate());
 		responseEntity = new ResponseEntity<>(result,HttpStatus.OK);
